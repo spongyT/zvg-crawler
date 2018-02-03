@@ -10,7 +10,10 @@ class ZvgPageSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        page = response.url.split("/")[-2]
-        filename = 'output/%s.html' % page
-        with open(filename, 'wb') as f:
-            f.write(response.body)
+        for link in response.css('a.navi_term_vor'):
+            yield {
+                'href': link.xpath('@href').extract(),
+            }
+        yield {
+            'title': response.selector.xpath('//title/text()').extract()
+        }
