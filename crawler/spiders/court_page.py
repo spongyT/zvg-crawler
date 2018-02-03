@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from urllib.parse import urljoin
 
 
 class CourtPageSpider(scrapy.Spider):
@@ -10,10 +11,11 @@ class CourtPageSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for link in response.css('a.navi_term_vor'):
-            yield {
-                'href': link.xpath('@href').extract(),
-            }
+        # print(">>>>>", response.request.url, response.request.url.rfind("/"))
+        # base = response.request.url[0:response.request.url.rfind("/")+1]
+        # print(">>>>>", base)
+        # for relative_link in response.xpath("//a/@href").re(r"termin_[0-9]+\.php"):
+        #     yield urljoin(base, ''.join(relative_link))
         yield {
-            'title': response.selector.xpath('//title/text()').extract()
+            "links": response.xpath("//a/@href").re(r"termin_[0-9]+\.php")
         }
