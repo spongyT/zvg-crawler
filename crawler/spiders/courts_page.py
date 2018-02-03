@@ -2,8 +2,8 @@
 import scrapy
 
 
-class ZvgMainPageSpider(scrapy.Spider):
-    name = "zvg_main_page"
+class CourtsPageSpider(scrapy.Spider):
+    name = "courts_page"
 
     start_urls = [
         'http://www.zvg-online.net/1300/index.php',
