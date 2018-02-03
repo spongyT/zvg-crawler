@@ -3,7 +3,7 @@ import scrapy
 
 
 class CourtsPageSpider(scrapy.Spider):
-    name = "courts_page"
+    name = "details-page"
 
     start_urls = [
         'http://www.zvg-online.net/1300/index.php',
